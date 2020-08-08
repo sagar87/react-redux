@@ -1,9 +1,13 @@
-import * as actions from "./actionTypes";
+import { createAction } from "@reduxjs/toolkit";
+
+export const bugAdded = createAction("bugAdded");
+export const bugResolved = createAction("bugResolved");
+export const bugRemoved = createAction("bugRemoved");
 
 let lastId = 0;
 export default function reducer(state = [], action) {
   switch (action.type) {
-    case actions.BUG_ADDED:
+    case bugAdded.type:
       return [
         ...state,
         {
@@ -12,9 +16,9 @@ export default function reducer(state = [], action) {
           resolved: false,
         },
       ];
-    case actions.BUG_REMOVED:
+    case bugRemoved.type:
       return state.filter((bug) => bug.id !== action.payload.id);
-    case actions.BUG_RESOLVED:
+    case bugResolved.type:
       return state.map((bug) =>
         bug.id === action.payload.id ? { ...bug, resolved: true } : bug
       );
@@ -22,8 +26,3 @@ export default function reducer(state = [], action) {
       return state;
   }
 }
-
-// Notes:
-// action.payload should contain the minum information to update the reducer
-// everything else should be computed in the reducer
-// A reducer is a pure function
