@@ -10,6 +10,11 @@ export const bugRemoved = (id) => ({
   payload: { id },
 });
 
+export const bugResolved = (id) => ({
+  type: actions.BUG_RESOLVED,
+  payload: { id },
+});
+
 // export function bugAdded(description) {
 //   return {
 //     type: actions.BUG_ADDED,
